@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>오늘의 내맛33 미션 | 소리튠영어 12기</title>
+<meta name="description" content="소리튠영어 부트캠프 12기 - 오늘의 내맛33 미션 이미지">
+<meta property="og:title" content="오늘의 내맛33 미션 | 소리튠영어 12기">
+<meta property="og:description" content="오늘의 내맛33 미션을 확인하세요">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+
+<style>
+:root {
+  --orange-primary: #FF6B1A;
+  --orange-light: #FF8540;
+  --orange-deep: #E55A0E;
+  --orange-bg: #FFF4ED;
+  --text-dark: #1A1A1A;
+  --text-muted: #6B6B6B;
+  --border: #F0E5DC;
+  --shadow: 0 8px 32px rgba(255, 107, 26, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, #FFF8F2 0%, #FFFFFF 100%);
+  color: var(--text-dark);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; }
+
+.brand-logo {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--orange-primary), var(--orange-deep));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 18px;
+  box-shadow: var(--shadow);
+}
+
+.brand-name { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; }
+.brand-name span { color: var(--orange-primary); }
+
+.cohort-badge {
+  background: var(--orange-bg);
+  color: var(--orange-deep);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.title-section { margin-bottom: 24px; text-align: center; }
+
+.day-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--orange-primary), var(--orange-deep));
+  color: white;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+
+.day-badge::before {
+  content: "•";
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.title em { font-style: normal; color: var(--orange-primary); }
+
+.date-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.image-card {
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--orange-bg);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.image-loading {
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--orange-bg);
+  border-top-color: var(--orange-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.image-empty {
+  padding: 60px 24px;
+  text-align: center;
+  display: none;
+}
+
+.image-empty-icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 16px;
+  background: var(--orange-bg);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+
+.image-empty h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.image-empty p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.image-empty code {
+  display: inline-block;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--orange-deep);
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  font-family: 'Courier New', monospace;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange-primary), var(--orange-deep));
+  color: white;
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+  background: white;
+  color: var(--text-dark);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:active { transform: scale(0.97); background: var(--orange-bg); }
+
+.info-card {
+  background: var(--orange-bg);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+
+.info-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--orange-deep);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.info-text {
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.info-text strong { color: var(--orange-deep); font-weight: 700; }
+
+.footer {
+  margin-top: auto;
+  padding-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.fade-in { animation: fadeIn 0.5s ease-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 380px) {
+  .title { font-size: 24px; }
+  .container { padding: 20px 16px 32px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="brand">
+      <div class="brand-logo">s</div>
+      <div class="brand-name">소리튠<span>영어</span></div>
+    </div>
+    <div class="cohort-badge" id="cohortBadge">12기</div>
+  </header>
+
+  <section class="title-section fade-in">
+    <div class="day-badge" id="dayBadge">오늘의 미션</div>
+    <h1 class="title">내맛 <em>33</em> 미션</h1>
+    <p class="date-text" id="dateText">날짜 불러오는 중...</p>
+  </section>
+
+  <div class="image-card fade-in">
+    <div class="image-wrapper">
+      <div class="image-loading" id="imageLoading">
+        <div class="loading-spinner"></div>
+        <p style="font-size: 13px;">오늘의 미션을 불러오고 있어요</p>
+      </div>
+
+      <img class="mission-image" id="missionImage" style="display:none;" alt="오늘의 내맛33 미션">
+
+      <div class="image-empty" id="imageEmpty">
+        <div class="image-empty-icon">📭</div>
+        <h3 id="emptyTitle">오늘 미션이 아직 업로드되지 않았어요</h3>
+        <p id="emptyMessage">잠시 후 다시 확인해 주세요.</p>
+        <code id="emptyFilename"></code>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="copyLink()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      링크 복사
+    </button>
+    <button class="btn btn-primary" onclick="saveImage()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      이미지 저장
+    </button>
+  </div>
+
+  <div class="info-card">
+    <div class="info-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      이용 안내
+    </div>
+    <div class="info-text">
+      이 링크는 <strong>매일 그날의 미션 이미지</strong>를 자동으로 보여줍니다.
+      북마크해두시면 매일 같은 링크로 오늘의 미션을 확인하실 수 있어요.
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div>소리튠영어 12기 부트캠프</div>
+    <div style="margin-top: 4px;">총 5주 33일 · 32개 미션 (W1D2 ~ W5D5)</div>
+  </footer>
+
+</div>
+
+<script>
+// ============================================================
+//  💡 다음 기수 운영 시 아래 3개 값만 수정하면 끝!
+// ============================================================
+const CONFIG = {
+  cohort: 12,                  // ① 기수 번호
+  startDate: '2026-05-11',     // ② 부트캠프 시작일 (W1D1, 반드시 월요일)
+  endDate: '2026-06-12',       // ③ 부트캠프 종료일 (W5D5, 반드시 금요일)
+  
+  // ⚠️ 아래는 수정 불필요 (시스템 설정)
+  imagePath: 'images/',
+  imageExtensions: ['jpg', 'jpeg', 'png', 'webp'],
+  skipFirstDay: true           // 첫날(W1D1)은 미션 없는 날
+};
+
+// ===== 날짜 유틸 =====
+function getToday() {
+  // 한국 시간(KST) 기준
+  const now = new Date();
+  const utcTime = now.getTime() + now.getTimezoneOffset() * 60000;
+  const kst = new Date(utcTime + 9 * 60 * 60000);
+  return kst;
+}
+
+function formatDateKorean(date) {
+  const y = date.getFullYear();
+  const m = date.getMonth() + 1;
+  const d = date.getDate();
+  const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+  return `${y}년 ${m}월 ${d}일 (${dayNames[date.getDay()]})`;
+}
+
+// 오늘이 부트캠프 몇 주차, 몇 day인지 계산
+function getWeekAndDay(today) {
+  const start = new Date(CONFIG.startDate + 'T00:00:00+09:00');
+  const end = new Date(CONFIG.endDate + 'T23:59:59+09:00');
+  
+  const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const startMid = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+  const endMid = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+  
+  if (todayMid < startMid) return { status: 'before' };
+  if (todayMid > endMid) return { status: 'after' };
+  
+  const daysSince = Math.floor((todayMid - startMid) / (1000 * 60 * 60 * 24));
+  const week = Math.floor(daysSince / 7) + 1;
+  
+  // JS getDay(): 0=일, 1=월, ..., 6=토
+  // 우리 규칙: 1=월(1day), 2=화(2day), ..., 7=일(7day)
+  const jsDay = today.getDay();
+  const day = jsDay === 0 ? 7 : jsDay;
+  
+  return { status: 'active', week, day, daysSince };
+}
+
+// 파일명 생성: W1D2, W2D1, W5D5 형식
+function buildFilename(week, day) {
+  return `W${week}D${day}`;
+}
+
+// ===== 이미지 로드 =====
+function loadImage(filename, extIndex = 0) {
+  const loadingEl = document.getElementById('imageLoading');
+  const imageEl = document.getElementById('missionImage');
+  const emptyEl = document.getElementById('imageEmpty');
+  
+  if (extIndex >= CONFIG.imageExtensions.length) {
+    // 모든 확장자 시도 실패 → 빈 상태 표시
+    loadingEl.style.display = 'none';
+    imageEl.style.display = 'none';
+    emptyEl.style.display = 'block';
+    document.getElementById('emptyFilename').textContent = filename + '.jpg';
+    return;
+  }
+  
+  const ext = CONFIG.imageExtensions[extIndex];
+  const imageUrl = `${CONFIG.imagePath}${filename}.${ext}`;
+  
+  imageEl.onload = () => {
+    loadingEl.style.display = 'none';
+    imageEl.style.display = 'block';
+    imageEl.classList.add('fade-in');
+  };
+  
+  imageEl.onerror = () => {
+    loadImage(filename, extIndex + 1);
+  };
+  
+  imageEl.src = imageUrl;
+}
+
+// ===== 초기화 =====
+function init() {
+  const today = getToday();
+  const koreanDate = formatDateKorean(today);
+  const result = getWeekAndDay(today);
+  
+  document.getElementById('dateText').textContent = koreanDate;
+  document.getElementById('cohortBadge').textContent = `${CONFIG.cohort}기`;
+  
+  const dayBadge = document.getElementById('dayBadge');
+  const loadingEl = document.getElementById('imageLoading');
+  const emptyEl = document.getElementById('imageEmpty');
+  
+  if (result.status === 'before') {
+    dayBadge.textContent = '부트캠프 시작 전';
+    loadingEl.style.display = 'none';
+    emptyEl.style.display = 'block';
+    document.getElementById('emptyTitle').textContent = '부트캠프가 아직 시작되지 않았어요';
+    document.getElementById('emptyMessage').textContent = `${CONFIG.startDate}부터 시작됩니다.`;
+    document.getElementById('emptyFilename').style.display = 'none';
+    return;
+  }
+  
+  if (result.status === 'after') {
+    dayBadge.textContent = '부트캠프 종료';
+    loadingEl.style.display = 'none';
+    emptyEl.style.display = 'block';
+    document.getElementById('emptyTitle').textContent = '부트캠프가 종료되었어요';
+    document.getElementById('emptyMessage').textContent = '5주간 정말 수고 많으셨습니다! 🎉';
+    document.getElementById('emptyFilename').style.display = 'none';
+    return;
+  }
+  
+  // 활성 상태: W#D# 표시 + 이미지 로드
+  dayBadge.textContent = `${CONFIG.cohort}기 · W${result.week}D${result.day}`;
+  
+  // 첫날(W1D1)은 미션 없는 날
+  if (CONFIG.skipFirstDay && result.week === 1 && result.day === 1) {
+    loadingEl.style.display = 'none';
+    emptyEl.style.display = 'block';
+    document.getElementById('emptyTitle').textContent = '오늘은 미션이 없는 날이에요';
+    document.getElementById('emptyMessage').textContent = '내일(W1D2)부터 첫 미션이 시작됩니다 🚀';
+    document.getElementById('emptyFilename').style.display = 'none';
+    return;
+  }
+  
+  const filename = buildFilename(result.week, result.day);
+  loadImage(filename);
+}
+
+// ===== 액션 =====
+function copyLink() {
+  const url = window.location.href;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('링크가 복사되었어요!'));
+  } else {
+    const textarea = document.createElement('textarea');
+    textarea.value = url;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToast('링크가 복사되었어요!');
+  }
+}
+
+function saveImage() {
+  const imageEl = document.getElementById('missionImage');
+  if (imageEl.style.display === 'none' || !imageEl.src) {
+    showToast('아직 이미지가 없어요');
+    return;
+  }
+  
+  const today = getToday();
+  const result = getWeekAndDay(today);
+  const filename = result.status === 'active' 
+    ? `소리튠_내맛33_${buildFilename(result.week, result.day)}` 
+    : '소리튠_내맛33';
+  
+  const link = document.createElement('a');
+  link.download = `${filename}.jpg`;
+  link.href = imageEl.src;
+  link.click();
+}
+
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.style.cssText = `
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: rgba(26,26,26,0.92); color: white; padding: 12px 24px;
+    border-radius: 30px; font-size: 14px; font-weight: 600;
+    z-index: 9999; animation: fadeIn 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  `;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = 'opacity 0.3s';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
+
+init();
+</script>
+
+</body>
+</html>
